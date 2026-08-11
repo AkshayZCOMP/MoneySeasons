@@ -6,13 +6,24 @@ A static lifetime investment calculator inspired by the broad, steady index-inve
 
 Open `index.html` in a browser.
 
-No build step is required. The app is currently made of:
+No build step is required for local use. The app is currently made of:
 
 - `index.html` for the page structure
 - `how-it-works.html` for search-friendly methodology and explanation content
 - `styles.css` for the responsive UI
 - `app.js` for the projection model, contribution periods, chart, and yearly table
 - `robots.txt` and `sitemap.xml` for basic search engine discovery
+
+## Deploy to Cloudflare Pages
+
+Use these settings when connecting the GitHub repo to Cloudflare Pages:
+
+- Framework preset: `None`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Root directory: leave blank
+
+The build script copies the static site files into `dist/`, which is the folder Cloudflare Pages should publish.
 
 ## Current calculator behavior
 
