@@ -30,6 +30,8 @@ const outputs = {
   balance: document.querySelector("#results-title"),
   yearsInvested: document.querySelector("#years-invested"),
   retirementBalance: document.querySelector("#retirement-balance"),
+  firstYearWithdrawal: document.querySelector("#first-year-withdrawal"),
+  realFirstYearWithdrawal: document.querySelector("#real-first-year-withdrawal"),
   totalContributions: document.querySelector("#total-contributions"),
   totalWithdrawals: document.querySelector("#total-withdrawals"),
   growthEarned: document.querySelector("#growth-earned"),
@@ -110,14 +112,16 @@ function toggleInflation() {
     control.hidden = !enabled;
   });
   document.querySelectorAll(".inflation-result").forEach((control) => {
-    control.hidden = !enabled;
+    const needsRetirement = control.classList.contains("retirement-control");
+    control.hidden = !enabled || (needsRetirement && !fields.includeRetirement.checked);
   });
 }
 
 function toggleRetirement() {
   const enabled = fields.includeRetirement.checked;
   document.querySelectorAll(".retirement-control").forEach((control) => {
-    control.hidden = !enabled;
+    const needsInflation = control.classList.contains("inflation-result");
+    control.hidden = !enabled || (needsInflation && !fields.useInflation.checked);
   });
   fields.planEndAge.disabled = !enabled;
 }
@@ -359,14 +363,18 @@ function projectInvestment({
 
   if (retirementBalance === 0) {
     retirementBalance = balance;
+    firstYearWithdrawal = includeRetirement ? retirementBalance * (withdrawalRate / 100) : 0;
   }
 
   const finalInflation = inflationMultiplier(finalAge - initialAge, inflationRate, useInflation);
+  const retirementInflation = inflationMultiplier(retirementAge - initialAge, inflationRate, useInflation);
 
   return {
     years: finalAge - initialAge,
     finalBalance: balance,
     retirementBalance,
+    firstYearWithdrawal,
+    realFirstYearWithdrawal: firstYearWithdrawal / retirementInflation,
     totalContributed,
     totalWithdrawn,
     growthEarned: balance + totalWithdrawn - totalContributed,
@@ -379,6 +387,8 @@ function renderOutputs(result) {
   outputs.balance.textContent = money(result.finalBalance);
   outputs.yearsInvested.textContent = result.years;
   outputs.retirementBalance.textContent = money(result.retirementBalance);
+  outputs.firstYearWithdrawal.textContent = money(result.firstYearWithdrawal);
+  outputs.realFirstYearWithdrawal.textContent = money(result.realFirstYearWithdrawal);
   outputs.totalContributions.textContent = money(result.totalContributed);
   outputs.totalWithdrawals.textContent = money(result.totalWithdrawn);
   outputs.growthEarned.textContent = money(result.growthEarned);
@@ -400,6 +410,7 @@ function renderOutputs(result) {
   }));
 
   toggleInflation();
+  toggleRetirement();
   drawChart(result.yearly);
 }
 

@@ -49,6 +49,7 @@ The included `wrangler.jsonc` tells Wrangler to deploy only the `dist/` folder, 
 - Static bond mode keeps up to the chosen dollar amount in bonds and treats the rest of the portfolio as stocks.
 - Optional post-retirement phase keeps returns going through a selected end age.
 - Withdrawals are paid monthly and can use either the initial retirement balance or the current portfolio balance each year.
+- The first-year withdrawal is shown in future dollars, and the inflation view shows that withdrawal in today's spending power.
 - Optional inflation near the graph shows what future balances would equal in today's spending power.
 
 This is an educational planning tool, not financial advice.
