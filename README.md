@@ -22,8 +22,18 @@ Use these settings when connecting the GitHub repo to Cloudflare Pages:
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Root directory: leave blank
+- Deploy command: leave blank
 
 The build script copies the static site files into `dist/`, which is the folder Cloudflare Pages should publish.
+
+## Deploy to Cloudflare Workers
+
+If you are using the newer Cloudflare Workers static assets flow instead of Pages, use:
+
+- Build command: `npm run build`
+- Deploy command: `npm run deploy`
+
+The included `wrangler.jsonc` tells Wrangler to deploy only the `dist/` folder, not the repository root.
 
 ## Current calculator behavior
 

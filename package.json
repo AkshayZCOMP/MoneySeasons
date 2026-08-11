@@ -4,6 +4,7 @@
   "private": true,
   "description": "A lifetime investment and retirement calculator for contribution seasons, stock and bond allocation, historical returns, withdrawals, and today's-dollar spending power.",
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "deploy": "wrangler deploy"
   }
 }
