@@ -9,8 +9,10 @@ Open `index.html` in a browser.
 No build step is required. The app is currently made of:
 
 - `index.html` for the page structure
+- `how-it-works.html` for search-friendly methodology and explanation content
 - `styles.css` for the responsive UI
 - `app.js` for the projection model, contribution periods, chart, and yearly table
+- `robots.txt` and `sitemap.xml` for basic search engine discovery
 
 ## Current calculator behavior
 
