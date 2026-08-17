@@ -4,12 +4,12 @@ A static lifetime investment calculator inspired by the broad, steady index-inve
 
 ## Run locally
 
-Open `index.html` in a browser.
+Open `index.html` for the text page or `calculator.html` for the calculator.
 
 No build step is required for local use. The app is currently made of:
 
-- `index.html` for the page structure
-- `how-it-works.html` for search-friendly methodology and explanation content
+- `index.html` for search-friendly methodology and explanation content
+- `calculator.html` for the interactive calculator page
 - `styles.css` for the responsive UI
 - `app.js` for the projection model, contribution periods, chart, and yearly table
 - `robots.txt` and `sitemap.xml` for basic search engine discovery

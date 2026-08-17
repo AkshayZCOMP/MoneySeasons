@@ -42,8 +42,8 @@
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="#top">Money Seasons</a>
         <div class="nav-group">
-          <a class="nav-link" href="#calculator">Calculator</a>
-          <a class="nav-link" href="how-it-works.html">How it works</a>
+          <a class="nav-link" href="calculator.html">Calculator</a>
+          <a class="nav-link" href="index.html">How it works</a>
         </div>
       </nav>
       <section class="hero-content" id="top">
@@ -56,7 +56,7 @@
             historical returns, and future dollars translated into today's spending power. Start with small monthly
             investments in your 20s or 30s and see how time can do more of the heavy lifting.
           </p>
-          <a class="hero-action" href="#calculator">Start calculating</a>
+          <a class="hero-action" href="calculator.html">Open the calculator</a>
         </div>
         <div class="hero-panel" aria-label="Example money seasons">
           <div class="season-line">
@@ -133,259 +133,86 @@
       </div>
     </section>
 
-    <main class="app-shell" id="calculator">
-      <section class="workspace" aria-labelledby="app-title">
-        <div class="intro">
-          <p class="eyebrow">Money Seasons calculator</p>
-          <h2 id="app-title">Build your lifetime scenario</h2>
-          <p class="subtitle">
-            Model long-term investing with age-based contribution seasons, steady growth assumptions,
-            and clear retirement targets.
-          </p>
-        </div>
-
-        <form class="calculator" id="calculator-form">
-          <fieldset class="panel basics">
-            <legend>Baseline</legend>
-            <label>
-              Initial age
-              <input id="initial-age" type="number" min="0" max="110" step="1" value="30">
-            </label>
-            <label>
-              Retirement age
-              <input id="retirement-age" type="number" min="1" max="120" step="1" value="65">
-            </label>
-            <label>
-              Initial investment
-              <input id="initial-investment" type="number" min="0" step="100" value="10000">
-            </label>
-          </fieldset>
-
-          <fieldset class="panel returns-panel">
-            <legend>Return model</legend>
-            <label>
-              Model
-              <select id="return-model">
-                <option value="stock-only">Stock only</option>
-                <option value="stock-bond">Stock and bond</option>
-                <option value="historical">Historical</option>
-              </select>
-            </label>
-            <label class="historical-control">
-              Historical start year
-              <select id="historical-start-year"></select>
-            </label>
-            <label class="fixed-control stock-return-control">
-              Stock return
-              <div class="suffix-input">
-                <input id="stock-return" type="number" min="-50" max="50" step="0.1" value="7">
-                <span>%</span>
-              </div>
-            </label>
-            <label class="fixed-control bond-return-control">
-              Bond return
-              <div class="suffix-input">
-                <input id="bond-return" type="number" min="-50" max="50" step="0.1" value="3">
-                <span>%</span>
-              </div>
-            </label>
-            <label class="allocation-control">
-              Allocation style
-              <select id="allocation-mode">
-                <option value="percentage">Stock/bond percentage</option>
-                <option value="static-bond">Static bond amount</option>
-              </select>
-            </label>
-            <label class="allocation-percent-control">
-              Pre-retirement stocks
-              <div class="suffix-input">
-                <input id="pre-stock-allocation" type="number" min="0" max="100" step="5" value="100">
-                <span>%</span>
-              </div>
-            </label>
-            <label class="allocation-percent-control">
-              Post-retirement stocks
-              <div class="suffix-input">
-                <input id="post-stock-allocation" type="number" min="0" max="100" step="5" value="75">
-                <span>%</span>
-              </div>
-            </label>
-            <label class="static-bond-control">
-              Static bond amount
-              <input id="static-bond-amount" type="number" min="0" step="1000" value="250000">
-            </label>
-            <p class="data-note stock-only-note">
-              Stock-only mode applies the stock return to the full portfolio.
-            </p>
-            <p class="data-note stock-bond-note">
-              Stock and bond mode blends the stock and bond returns using the selected allocation.
-            </p>
-            <p class="data-note historical-control">
-              Uses
-              <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html" target="_blank" rel="noreferrer">annual S&amp;P 500 total returns and 10-year Treasury bond returns</a>
-              from 1928-2025.
-              Percentage mode can use a different split before and after retirement. Static bond mode keeps up to that dollar amount in bonds and treats the rest as stocks.
-            </p>
-            <p class="data-note source-note">
-              Historical return data source:
-              <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html" target="_blank" rel="noreferrer">Aswath Damodaran, NYU Stern</a>.
-            </p>
-          </fieldset>
-
-          <fieldset class="panel retirement-panel">
-            <legend>Post-retirement</legend>
-            <label class="checkbox-label">
-              <input id="include-retirement" type="checkbox" checked>
-              Include post-retirement
-            </label>
-            <label class="retirement-control">
-              Plan until age
-              <input id="plan-end-age" type="number" min="1" max="120" step="1" value="90">
-            </label>
-            <label class="retirement-control">
-              Withdrawal rate
-              <div class="suffix-input">
-                <input id="withdrawal-rate" type="number" min="0" max="25" step="0.1" value="4">
-                <span>%</span>
-              </div>
-            </label>
-            <label class="retirement-control">
-              Withdrawal style
-              <select id="withdrawal-mode">
-                <option value="initial">Initial retirement balance</option>
-                <option value="current">Current balance each year</option>
-              </select>
-            </label>
-            <p class="data-note retirement-control">
-              Withdrawals are paid monthly.
-            </p>
-          </fieldset>
-
-          <section class="panel schedule" aria-labelledby="schedule-title">
-            <div class="section-heading">
-              <div>
-                <h2 id="schedule-title">Contribution Schedule</h2>
-                <p>Add the different money seasons of your life.</p>
-              </div>
-              <button type="button" class="icon-button" id="add-period" aria-label="Add contribution period" title="Add contribution period">+</button>
-            </div>
-            <div id="period-list" class="period-list"></div>
-          </section>
-
-          <div class="actions">
-            <button type="submit" class="primary-action">Calculate</button>
-            <button type="button" class="secondary-action" id="reset-demo">Reset example</button>
-          </div>
-        </form>
+    <main class="content-page">
+      <section class="content-block">
+        <h2>Why contribution seasons matter</h2>
+        <p>
+          Many investment calculators ask for one initial investment, one monthly contribution, one annual return,
+          and one time period. That is useful for a quick compound interest estimate, but it does not match how
+          people usually save and invest. A person might invest less in their twenties, more in peak earning years,
+          pause during family or business changes, then make catch-up contributions before retirement.
+        </p>
+        <p>
+          Money Seasons lets you create multiple contribution periods by age. You can model one monthly investment
+          from age 30 to 40, a different monthly contribution from age 40 to 50, and a yearly contribution from
+          age 50 to retirement. That makes the lifetime investment projection easier to connect to actual life plans.
+        </p>
       </section>
 
-      <section class="results" aria-labelledby="results-title">
-        <div class="result-topline">
-          <div>
-            <p class="eyebrow">Projected end portfolio</p>
-            <h2 id="results-title">$0</h2>
-          </div>
-          <div class="target-age">
-            <span id="years-invested">0</span>
-            <small>years modeled</small>
-          </div>
-        </div>
+      <section class="content-block">
+        <h2>Planning for young investors</h2>
+        <p>
+          When you are just starting to invest, the biggest question is often not whether you have a perfect plan.
+          It is whether small, repeatable contributions can become meaningful over time. Money Seasons helps younger
+          investors test beginner investing scenarios like $50, $100, $250, or $500 per month, then compare what
+          happens when those contributions rise with future income.
+        </p>
+        <p>
+          You can use it as a monthly investment calculator, Roth IRA growth calculator, 401(k) contribution planner,
+          or long-term compound interest calculator. Add a lower contribution season for early career years, a higher
+          saving rate after raises, and a different stock and bond allocation later in life to see how a realistic
+          retirement savings path may develop.
+        </p>
+      </section>
 
-        <div class="metric-grid">
-          <div class="metric">
-            <span>At retirement</span>
-            <strong id="retirement-balance">$0</strong>
-          </div>
-          <div class="metric retirement-control">
-            <span>First-year withdrawal</span>
-            <strong id="first-year-withdrawal">$0</strong>
-          </div>
-          <div class="metric retirement-control inflation-result">
-            <span>Withdrawal in today's dollars</span>
-            <strong id="real-first-year-withdrawal">$0</strong>
-          </div>
-          <div class="metric">
-            <span>Total contributions</span>
-            <strong id="total-contributions">$0</strong>
-          </div>
-          <div class="metric">
-            <span>Total withdrawals</span>
-            <strong id="total-withdrawals">$0</strong>
-          </div>
-          <div class="metric">
-            <span>Investment gain</span>
-            <strong id="growth-earned">$0</strong>
-          </div>
-          <div class="metric inflation-result">
-            <span>Today's dollars</span>
-            <strong id="real-balance">$0</strong>
-          </div>
-        </div>
+      <section class="content-block">
+        <h2>Stock-only, stock-and-bond, and historical return modes</h2>
+        <p>
+          The calculator supports stock-only assumptions, stock and bond allocation assumptions, and historical
+          stock and bond returns. In stock-and-bond mode, you can enter assumed stock returns and bond returns,
+          then choose an allocation before and after retirement. In historical mode, Money Seasons uses annual
+          S&amp;P 500 total returns and 10-year Treasury bond returns from
+          <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html" target="_blank" rel="noreferrer">Aswath Damodaran's NYU Stern historical return data</a>.
+        </p>
+        <p>
+          This makes it possible to compare a simple stock-only retirement plan, a stock and bond portfolio,
+          a static bond amount, or a historical return path. It is not a prediction of the future, but it gives
+          a clearer way to test assumptions than a single average return number.
+        </p>
+      </section>
 
-        <div class="graph-options">
-          <label class="inline-checkbox">
-            <input id="use-inflation" type="checkbox">
-            Today's dollars
-          </label>
-          <label class="inflation-control compact-rate">
-            Inflation
-            <div class="suffix-input">
-              <input id="inflation-rate" type="number" min="0" max="25" step="0.1" value="3">
-              <span>%</span>
-            </div>
-          </label>
-        </div>
+      <section class="content-block">
+        <h2>Post-retirement withdrawals</h2>
+        <p>
+          A retirement calculator should not stop at retirement age. Money Seasons can continue the portfolio
+          through retirement and model monthly withdrawals. You can test a withdrawal rate based on the initial
+          retirement balance or a percentage of the current portfolio balance each year.
+        </p>
+        <p>
+          This helps answer questions like how a 4% withdrawal rate behaves, how stock and bond allocation affects
+          retirement income, and how long a portfolio may last under different investment return assumptions.
+        </p>
+      </section>
 
-        <div class="chart-wrap">
-          <canvas id="growth-chart" width="760" height="360" aria-label="Investment growth chart"></canvas>
-        </div>
+      <section class="content-block">
+        <h2>Inflation-adjusted spending power</h2>
+        <p>
+          Future balances can look large in nominal dollars. The optional inflation view translates the projected
+          ending balance into today's dollars, so you can estimate the spending power of a future portfolio.
+          This is useful for retirement planning because a million dollars decades from now may not feel like
+          a million dollars today.
+        </p>
+      </section>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Age</th>
-                <th>Phase</th>
-                <th>Stocks</th>
-                <th>Return</th>
-                <th>Total contrib.</th>
-                <th>Total withdrawn</th>
-                <th>Balance</th>
-                <th class="inflation-result">Today's $</th>
-              </tr>
-            </thead>
-            <tbody id="yearly-table"></tbody>
-          </table>
-        </div>
+      <section class="content-block">
+        <h2>What Money Seasons is best for</h2>
+        <p>
+          Money Seasons is best for long-term investing scenarios, financial independence planning, retirement
+          planning, stock and bond allocation comparisons, and understanding how different saving periods affect
+          compound growth. It is an educational calculator, not financial advice.
+        </p>
+        <a class="hero-action" href="calculator.html">Open the calculator</a>
       </section>
     </main>
-
-    <template id="period-template">
-      <article class="period-row">
-        <label>
-          From age
-          <input class="period-start" type="number" min="0" max="120" step="1">
-        </label>
-        <label>
-          Until age
-          <input class="period-end" type="number" min="0" max="120" step="1">
-        </label>
-        <label>
-          Amount
-          <input class="period-amount" type="number" min="0" step="25">
-        </label>
-        <label>
-          Frequency
-          <select class="period-frequency">
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-          </select>
-        </label>
-        <button type="button" class="remove-period" aria-label="Remove contribution period" title="Remove contribution period">x</button>
-      </article>
-    </template>
-
-    <script src="historical-returns.js"></script>
-    <script src="app.js"></script>
   </body>
 </html>

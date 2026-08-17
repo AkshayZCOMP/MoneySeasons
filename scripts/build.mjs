@@ -3,7 +3,7 @@ import { copyFile, mkdir, rm } from "node:fs/promises";
 const outputDir = "dist";
 const staticFiles = [
   "index.html",
-  "how-it-works.html",
+  "calculator.html",
   "styles.css",
   "app.js",
   "historical-returns.js",
